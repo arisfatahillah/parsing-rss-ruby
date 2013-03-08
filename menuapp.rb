@@ -1,4 +1,3 @@
-require "rubygems"
 require "highline/import"
 require 'nokogiri'
 require 'rss'
