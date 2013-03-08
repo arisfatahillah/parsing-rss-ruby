@@ -8,12 +8,16 @@ def baca_xml
   my_file = gets.gsub(/[\n\s]/,'')
   puts my_file.inspect
   #myfile = 'resume.xml'
-  xml=Nokogiri::XML File.open(my_file)
-  xml.xpath('//resource').each do |node| 
-    puts " - #{ node['name'] } \n ( #{ node['version'] } )" 
+  doc = Nokogiri::XML File.open(my_file)
+  doc.search('item').each do |item|
+    puts "===================================================================="
+    puts "Title: #{item.at('title').text}"
+    puts "Date: #{item.at('pubDate').text}"
+    puts "Url: #{item.at('link').text}"
+    puts "===================================================================="
+    puts " \n"
+    puts " \n"
   end
-  puts " \n"
-  puts " \n"
 end
 
 #method baca rss
@@ -28,7 +32,7 @@ def baca_rss
   doc = Nokogiri::XML xml_file
   doc.search('item').each do |item|
     puts "===================================================================="
-    puts "Item: #{item.at('title').text}"
+    puts "Title: #{item.at('title').text}"
     puts "Date: #{item.at('pubDate').text}"
     puts "Url: #{item.at('link').text}"
     puts "===================================================================="
