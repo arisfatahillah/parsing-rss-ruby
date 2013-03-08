@@ -35,14 +35,13 @@ def baca_rss
  end
 end
 
-begin
-  puts
-  loop do
-    choose do |menu|
-      menu.prompt = "Silahkan pilih menu mas Bro !!! "
-      menu.choice(:XML) { baca_xml() }
-      menu.choice(:RSS) { baca_rss() }
-      menu.choice(:Quit, "Exit program.") { exit }
-    end
+
+puts
+loop do
+  choose do |menu|
+    menu.prompt = "Silahkan pilih menu mas Bro !!! "
+    menu.choice(:XML) { baca_xml() }
+    menu.choice(:RSS) { baca_rss() }
+    menu.choice(:Quit, "Exit program.") { exit }
   end
 end
