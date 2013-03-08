@@ -1,6 +1,5 @@
 require "highline/import"
 require 'nokogiri'
-require 'rss'
 require 'open-uri'
 
 #method baca xml
@@ -23,21 +22,16 @@ def baca_rss
  
  #contoh url rss feed
  #url = 'http://www.ruby-lang.org/en/feeds/news.rss'
- 
- open(my_url) do |rss|
-   feed = RSS::Parser.parse(rss)
-   puts "Title: #{feed.channel.title}"
-   feed.items.each do |item|
-    
-	 puts "========================================================================="
-     puts "Item: #{item.title}"
-	 puts "Date: #{item.pubDate}"
-	 puts "Url: #{item.link}"
-	 puts "========================================================================="
-	 puts " \n"
-	 puts " \n"
-	
-   end
+ xml_file = open my_url
+ doc = Nokogiri::XML xml_file
+ doc.search('item').each do |item|
+  puts "========================================================================="
+     puts "Item: #{item.at('title').text}"
+   puts "Date: #{item.at('pubDate').text}"
+   puts "Url: #{item.at('link').text}"
+   puts "========================================================================="
+   puts " \n"
+   puts " \n"
  end
 end
 
